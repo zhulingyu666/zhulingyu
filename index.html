@@ -1,0 +1,203 @@
+<!doctype html>
+<html>
+    <head> 
+        <meta charset="UTF-8"> 
+        <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1"> 
+        <link rel="shortcut icon" href="favicon.png" type="image/x-icon">
+        <title>我的个人网站</title>
+    </head> 
+    <body> 
+    <style>
+    *{
+    margin: 0;
+    padding: 0;
+    }
+    :root{
+    --body-width:100%;
+    --body-height:100vh;
+    --topbar-height:42px;
+    }
+    body{
+    background: linear-gradient(135deg,#4D2EFF,#0800FF75);
+    background-attachment: fixed;
+    width: var(--body-width);
+    height: var(--body-height);
+    }
+    #topbar{
+    position:absolute;
+    width: var(--body-width);
+    max-width:600px;
+    height:var(--topbar-height);
+    min-width:100px;
+    background: linear-gradient(90deg,#A98BFF,transparent);
+    border-bottom-right-radius: 25px;   
+    border-bottom:1px solid #FFFFFF50;
+    border-left:10px solid #FFFFFF;
+    animation:1.5s borderflash infinite;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    display:flex;
+    align-items:center;
+    top:0;
+    }
+    @keyframes borderflash{
+    from{border-left:10px solid #FFFFFF;}
+    55%{border-left:10px solid #FFFFFF;}
+    to{border-left:10px solid transparent;}
+    }
+    .welcomep{
+    color:#FFFFFF;
+    margin-top: 10px;
+    text-align:center;
+    display:flex;
+    width: var(--body-width);
+    justify-content:center;
+    
+    flex-wrap: wrap;
+    }
+    #personal-introduction-box{
+    width:var(--body-width);
+    display:flex;
+    justify-content:center;
+    background-color:transparent;
+    flex-wrap: wrap;
+    margin-top:var(--topbar-height);
+    
+    }
+    #name-show{
+    background: linear-gradient(90deg, #00AFFF, #46D2FF,90%,#00AFFF);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-size:5rem;
+    width:var(--body-width);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+    text-align:center;
+    margin-top:4px;
+    }
+    .Brief-about{
+    width:var(--body-width);
+    text-align:center;
+    background: linear-gradient(90deg, #FFFFFF, #FF8B8B);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    transform: translateX(20px);
+    
+    }
+    .welcomespan{
+    letter-spacing: 1vw;
+    font-size:1.2rem;
+    width:var(--body-width);
+    background: linear-gradient(90deg, #FFFB00,#E8B9FF);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    }
+    /*burger效果*/
+    .burger {
+  position: relative;
+  width: calc(var(--topbar-height) - 3px);
+  height: calc(var(--topbar-height) - 12px);
+  background: transparent;
+  cursor: pointer;
+  display: block;
+}
+
+.burger input {
+  display: none;
+}
+
+.burger span {
+  display: block;
+  position: absolute;
+  height: 4px;
+  width: 100%;
+  background: #2D2D2D;
+  border-radius: 9px;
+  opacity: 1;
+  left: 0;
+  transform: rotate(0deg);
+  transition: .25s ease-in-out;
+}
+
+.burger span:nth-of-type(1) {
+  top: 0px;
+  transform-origin: left center;
+}
+
+.burger span:nth-of-type(2) {
+  top: 50%;
+  transform: translateY(-50%);
+  transform-origin: left center;
+}
+
+.burger span:nth-of-type(3) {
+  top: 100%;
+  transform-origin: left center;
+  transform: translateY(-100%);
+}
+
+.burger input:checked ~ span:nth-of-type(1) {
+  transform: rotate(45deg);
+  top: 0px;
+  left: 5px;
+}
+
+.burger input:checked ~ span:nth-of-type(2) {
+  width: 0%;
+  opacity: 0;
+}
+
+.burger input:checked ~ span:nth-of-type(3) {
+  transform: rotate(-45deg);
+  top: 28px;
+  left: 5px;
+}
+  #navigation-box{
+  position:absolute;
+  top:var(--topbar-height);
+  width:var(--body-width);
+  height:var(--body-height);
+  background-color:#FFFFFF90;
+  display:none;/*flex，默认为none*/
+  backdrop-filter: blur(2px);
+  border-bottom-right-radius: 50px;
+  }
+  
+    </style>
+    <div id="topbar">
+     <label class="burger" for="burger">
+     <input type="checkbox" id="burger">
+     <span></span>
+     <span></span>
+     <span></span>
+    </label>
+    
+    
+    </div>
+    <div id="navigation-box">
+     <div class="linkbox">简介</div>
+     <div class="linkbox"></div>
+    </div>
+    <div id="personal-introduction-box">
+     <p class="welcomep"><span class="welcomespan">用代码构建秩序，用创新定义未来</span><span style="margin-top:7px;font-size:1.2rem;">欢迎来到我的个人网站:</span></p>
+     <h1 id="name-show">朱凌瑀</h1>
+     <p class="Brief-about">————名技术爱好者</p>
+    </div>
+    <noscript>
+    当前无script，请打开script。
+    </noscript>
+    <script>
+    burger.addEventListener("click",navigationBox)
+    function navigationBox(){
+    if (burger.checked){
+    document.getElementById("navigation-box").style.display="flex"
+}else{
+    document.getElementById("navigation-box").style.display="none"
+}
+}
+    
+    </script>
+    </body>
+</html>
