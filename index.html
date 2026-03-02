@@ -474,23 +474,23 @@ class LazyImg {
 
     const fullImg = document.createElement('img');
     fullImg.className = 'lazy-img-full';
+    fullImg.src = fullSrc; // 👈 修复：提前加载
 
     wrap.appendChild(thumbImg);
     wrap.appendChild(fullImg);
     el.replaceWith(wrap);
 
-    // 👇 核心：自动加载图片获取真实宽高比
+    // 自动算比例
     const tempImg = new Image();
     tempImg.src = fullSrc;
     tempImg.onload = () => {
       const ratio = tempImg.width / tempImg.height;
-      wrap.style.paddingTop = `${100 / ratio}%`;
+      wrap.style.paddingTop = (100 / ratio) + '%';
+    };
 
-      // 加载高清图
-      fullImg.onload = () => {
-        fullImg.classList.add('loaded');
-      };
-      fullImg.src = fullSrc;
+    // 加载完渐显
+    fullImg.onload = () => {
+      fullImg.classList.add('loaded');
     };
   }
 }
