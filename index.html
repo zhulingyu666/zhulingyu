@@ -35,6 +35,12 @@
     background-attachment: fixed;
     width: var(--body-width);
     height: var(--body-height);
+    font-family:
+     "Inter",
+     "Alibaba PuHuiTi",
+     "Source Han Sans SC",
+     "Microsoft YaHei",
+     sans-serif;
     }
     #topbar{
     position:fixed;
@@ -97,17 +103,29 @@
     background-clip: text;
     color: transparent;
     transform: translateX(20px);
-    
+    font-size:1.1rem;
     }
     .welcomespan{
     letter-spacing: 1vw;
     font-size:1.2rem;
     width:var(--body-width);
-    background: linear-gradient(90deg, #FFFB00,#E8B9FF);
+    background: linear-gradient(90deg, #FFFB00,#E8B9FF,#A2FFF3);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
+    background-size: 200% 100%; /* 放大背景，让渐变滑动更丝滑 */
+    background-position: 0 0;
+    transition: background-position 0.5s ease; /* 过渡让颜色切换无断层 */
+    animation:15s welcomespan infinite;
     }
+    @keyframes welcomespan{
+     0% {
+         background-position: 0 0; /* 初始位置 */
+     }
+     100% {
+         background-position: 200% 0; /* 滑动到右侧，利用放大的背景实现渐变流动 */
+     }
+ }
     /*burger效果*/
     .burger {
   position: relative;
@@ -214,6 +232,43 @@
   .linkbox:hover{
   backdrop-filter: blur(5px);
   }
+  #case-show-box{
+  display:flex;
+  width: var(--body-width);
+  margin-top: 10px;
+  color:#00F4FF;
+  padding-left: 10px;
+  justify-content:center;
+  border-top:1px solid #A2AEFF50;
+  flex-wrap: wrap;
+  }
+  #school-show{
+  color:#FFFB00;
+  margin-top: 10px;
+  }
+  .case-show-title{
+  text-align:left;
+  font-size:1.5rem;
+  width: var(--body-width);
+  text-align: center;
+  }
+  #cese-box{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;       /* 卡片之间的距离 */
+  padding: 40px 0;
+  background-color: #FFFFFF;
+  }
+  .case-card {
+  border-radius: 6px;
+  overflow: hidden;
+  transition: 0.3s;
+  background-color:#606060;
+  cursor: pointer;
+}
+  .case-card:hover {
+  transform: translateY(-4px); /* 轻微上浮，高级感 */
+}
     </style>
     <div id="topbar">
      <label class="burger" for="burger">
@@ -227,12 +282,23 @@
     </div>
     <div id="navigation-box">
      <div class="linkbox" href="#personal-introduction-box">简介</div>
-     <div class="linkbox">信息展示</div>
+     <div class="linkbox" href="#information-show-box">案例展示 / 项目经验</div>
     </div>
     <div id="personal-introduction-box">
      <p class="welcomep"><span class="welcomespan">用代码构建秩序，用创新定义未来</span><span style="margin-top:7px;font-size:1.2rem;">欢迎来到我的个人网站:</span></p>
      <h1 id="name-show">朱凌瑀</h1>
      <p class="Brief-about">————名技术爱好者</p>
+     <p id="school-show"> ©2026 朱凌瑀｜汉王镇中心中学</p>
+    </div>
+    <div id="case-show-box">
+     <h1 class="case-show-title">案例展示 / 项目经验：</h1>
+     <div id="cese-box">
+      <div class="case-card">
+       
+      </div>
+     
+     
+     </div>
     </div>
     <noscript>
     当前无script，请打开script。
