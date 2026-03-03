@@ -27,6 +27,8 @@
     *{
     margin: 0;
     padding: 0;
+    -webkit-tap-highlight-color: transparent;
+    tap-highlight-color: transparent;
     }
     :root{
     --body-width:100%;
@@ -209,7 +211,7 @@
   transform: translateZ(0); /* 强制GPU加速 */
   backface-visibility: hidden; /* 减少闪烁 */
   animation: navigationappear 0.4s ease-out;
-  z-index:2;
+  z-index:3;
   overflow-y: auto;
   }
   @keyframes navigationappear{
@@ -266,6 +268,7 @@
   gap: 1rem;
   width:var(--body-width);
   justify-content: center;
+  pointer-events: none; /* 核心：父容器不接收鼠标hover事件 */
   }
   .case-card {
   border-radius: 10px;
@@ -275,6 +278,7 @@
   background-color:#B9B9FF90;
   position: relative;
   color: #3500FF;
+  pointer-events: auto; /* 核心：子元素恢复鼠标事件，仅card可hover */
 }
   .case-card > lazy-img{
   width: 100%;
@@ -294,13 +298,15 @@
   transform: translateY(-4px); /* 轻微上浮，高级感 */
   
 }
+  
    #case-box:hover > .case-card:not(:hover) {
-  filter: blur(10px);
-  transform: scale(0.9, 0.9);
-}
+   filter: blur(3px);
+   transform: scale(0.9, 0.9);
+ }
   .more-case-p{
   cursor: pointer;
   font-size:1.1rem;
+  pointer-events: auto;
   }
   .more-case-p::after{
   content: " >>";
@@ -393,7 +399,7 @@
     </div>
     <div id="navigation-box">
      <div class="linkbox" href="#personal-introduction-box">简介</div>
-     <div class="linkbox" href="#information-show-box">案例展示 / 项目经验</div>
+     <div class="linkbox" href="#case-show-box">案例展示 / 项目经验</div>
 
     </div>
     <div id="personal-introduction-box">
@@ -423,14 +429,26 @@
     当前无script，请打开script。
     </noscript>
     <script>
-    burger.addEventListener("click",navigationBox)
-    function navigationBox(){
-    if (burger.checked){
-    document.getElementById("navigation-box").style.display="block"
-}else{
-    document.getElementById("navigation-box").style.display="none"
-}
-}
+    // 替换原burger点击代码
+const burger = document.getElementById('burger'); // 新增：获取DOM元素
+const navigationBox = document.getElementById('navigation-box');
+burger.addEventListener("change", () => { // 改用change事件，适配复选框
+  navigationBox.style.display = burger.checked ? "block" : "none";
+});
+    // 点击外部关闭导航框
+document.addEventListener('click', (e) => {
+  const isBurger = e.target.closest('.burger');
+  const isNav = e.target.closest('#navigation-box');
+  if (!isBurger && !isNav && burger.checked) {
+    burger.checked = false;
+    navigationBox.style.display = 'none';
+  }
+});
+
+    
+    
+    
+    
     const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
@@ -448,6 +466,19 @@
 // 监听所有需要动画的元素
 document.querySelectorAll('.more-case-p').forEach(el => {
   observer.observe(el);
+});
+// 导航链接点击跳转+平滑滚动
+document.querySelectorAll('.linkbox').forEach(box => {
+  const targetId = box.getAttribute('href');
+  box.addEventListener('click', () => {
+    // 跳转目标区域
+    document.querySelector(targetId).scrollIntoView({
+      behavior: 'smooth' // 平滑滚动
+    });
+    // 跳转后自动关闭导航框
+    burger.checked = false;
+    navigationBox.style.display = 'none';
+  });
 });
 
 
