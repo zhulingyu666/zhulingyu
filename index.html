@@ -17,7 +17,7 @@
         <meta name="msvalidate.01" content="A7FD3F19D53DE996F6718AA1790486EA" />
         <meta name="sogou_site_verification" content="vCBJWPLcHc" />
         <meta name="360-site-verification" content="d3bddb3aa213316df967d1780c4b810b" />
-        <!-- IE 兼容元标签 -->
+        
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="msapplication-tap-highlight" content="no">
         <link rel="shortcut icon" href="favicon.png" type="image/x-icon">
@@ -37,6 +37,10 @@
     --body-height:100vh;
     --topbar-height:42px;
     --case-width:200px;
+    }
+    h1{
+    font-size: 2.3rem;
+    color: #00FFF4;
     }
     body{
     background: linear-gradient(135deg,#4D2EFF,#0800FF75);
@@ -82,6 +86,7 @@
     align-items:center;
     top:0;
     left:0;
+    z-index: 4;
     }
     @keyframes borderflash{
     from{border-left:10px solid #FFFFFF;}
@@ -404,9 +409,47 @@
 .lazy-img-full.loaded {
   opacity: 1;
 }
-
-
-
+  #classmatebox{
+   width:var(--body-width);
+   position: absolute;
+   z-index: 3;
+   height:480px;
+   max-width: 650px;
+   display:none;
+   justify-content: center;
+   left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(22px) saturate(200%);
+  -webkit-backdrop-filter: blur(22px) saturate(200%);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.1),
+    0 1px 2px rgba(255, 255, 255, 0.2) inset;
+  
+  }
+  .classmoretitle{
+  color: #D1B9FF;
+  }
+  #ability-show{
+  font-size: 1rem;
+  width: var(--body-width);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  color: #FFFFFF;
+  }
+  #ability-box{
+  width: 100vw;
+  max-width: 650px;
+  border: solid #00FFF4 1px;
+  height:400px;
+  align-items: center;
+  border-radius: 35px;
+  text-align: center;
+  padding-top: 40px;
+  }
 /* 适配浏览器 - 支持backdrop-filter的浏览器：显示毛玻璃 */
 @supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
   #topbar { background: linear-gradient(90deg,#A98BFF,transparent); }
@@ -463,6 +506,7 @@
     <div id="navigation-box">
      <div class="linkbox" href="#personal-introduction-box">简介</div>
      <div class="linkbox" href="#case-show-box">案例展示 / 项目经验</div>
+     <div class="linkbox" href="#ability-show">个人能力</div>
     </div>
     <div id="personal-introduction-box">
      <p class="welcomep"><span class="welcomespan">用代码构建秩序，用创新定义未来</span><span style="margin-top:7px;font-size:1.2rem;">欢迎来到我的个人网站:</span></p>
@@ -470,6 +514,15 @@
      <p class="Brief-about">————名技术爱好者</p>
      <p id="school-show" title="单击以了解"> ©2026 朱凌瑀｜汉王镇中心中学</p>
     </div>
+    
+    <!--  班级人物，等等再做吧  -->
+    <div id="classmatebox">
+     <h1 class="classmoretitle">班级详情：</h1>
+     
+    
+    </div>
+    
+    
     <div id="case-show-box">
      <h1 class="case-show-title">案例展示 / 项目经验：</h1>
      <div id="case-box">
@@ -487,7 +540,22 @@
      </div>
 
     </div>
- 
+    
+    <div id="ability-show">
+     <div id="ability-box">
+     <h1>前端核心:</h1><br> 
+     HTML5 / CSS3 / JavaScript ES6+
+     响应式布局 / Flex / Grid
+     浏览器工作原理 / 网页优化<br> 
+     <h1>工程与工具:</h1><br> 
+     Node.js（入门）
+     Git / VS Code<br> 
+     <h1>系统与底层:</h1><br> 
+     Android 设备解锁
+     Bootloader 操作
+     系统底层理解    
+     </div>
+    </div>
     <script>
     // 替换原burger点击代码
 const burger = document.getElementById('burger'); // 新增：获取DOM元素
