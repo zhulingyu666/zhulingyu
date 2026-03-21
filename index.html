@@ -12,7 +12,6 @@
         <meta property="og:image" content="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAERZd5ppnWqWcY9MeaIuBKF8M3Q3raZfAACoyEAAt7rOVW3pPSf5jkVnzoE.jpg">
         <meta name="description" content="您好，我叫朱凌瑀，欢迎来到我的个人网站 | 以代码为笔，以技术为光，照亮未知的世界 | 热爱不止于技术，探索不止于当下 | 如果可以，我们一起努力！">
         <meta name="keywords" content="朱凌瑀, 个人网站, 前端开发">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
         <!-- 搜索引擎 -->
         <meta name="msvalidate.01" content="A7FD3F19D53DE996F6718AA1790486EA" />
         <meta name="sogou_site_verification" content="vCBJWPLcHc" />
@@ -150,6 +149,7 @@
     animation:15s welcomespan infinite;
     }
     @keyframes welcomespan{
+        will-change: background-position;
      0% {
          background-position: 0 0; /* 初始位置 */
      }
@@ -239,6 +239,7 @@
   overflow-y: auto;
   }
   @keyframes navigationappear{
+
   from{
   -webkit-clip-path: polygon(0 0, 17% 0, 17% 15%, 0 15%);
   clip-path: polygon(0 0, 17% 0, 17% 15%, 0 15%);}
@@ -439,16 +440,16 @@
   flex-wrap: wrap;
   justify-content: center;
   color: #FFFFFF;
+  border-top: dashed 5px #EBEBEB20;
+  background: rgba(255,255,255,.05);
+  backdrop-filter: blur(5px);
   }
   #ability-box{
-  width: 100vw;
-  max-width: 650px;
-  border: solid #00FFF4 1px;
-  height:400px;
   align-items: center;
   border-radius: 35px;
   text-align: center;
   padding-top: 40px;
+  padding-bottom: 55px;
   }
 /* 适配浏览器 - 支持backdrop-filter的浏览器：显示毛玻璃 */
 @supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
@@ -542,18 +543,20 @@
     </div>
     
     <div id="ability-show">
+   
      <div id="ability-box">
+     <h1 style="font-size: 2.6rem;color: #FFFB00;">个人能力:</h1><br>
      <h1>前端核心:</h1><br> 
-     HTML5 / CSS3 / JavaScript ES6+
+     <p>HTML5 / CSS3 / JavaScript ES6+
      响应式布局 / Flex / Grid
-     浏览器工作原理 / 网页优化<br> 
+     浏览器工作原理 / 网页优化</p><br> 
      <h1>工程与工具:</h1><br> 
-     Node.js（入门）
-     Git / VS Code<br> 
+     <p>Node.js（入门）
+     Git / VS Code</p><br> 
      <h1>系统与底层:</h1><br> 
-     Android 设备解锁
+     <p>Android 设备解锁
      Bootloader 操作
-     系统底层理解    
+     系统底层理解</p>
      </div>
     </div>
     <script>
@@ -601,11 +604,11 @@ document.querySelectorAll('.linkbox').forEach(box => {
   box.addEventListener('click', () => {
     // 跳转目标区域
     document.querySelector(targetId).scrollIntoView({
-      behavior: 'smooth' // 平滑滚动
+      behavior: 'smooth' // 平滑滚动  
     });
     // 跳转后自动关闭导航框
     burger.checked = false;
-    navigationBox.style.display = 'none';
+    navigationBox.style.display = 'none';  
   });
 });
 
