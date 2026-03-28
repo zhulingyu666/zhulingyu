@@ -385,7 +385,7 @@
   
 .lazy-img-container {
   position: relative;
-  width: 100%;
+  width: auto;
   height: auto;
   overflow: hidden;
   background: #f1f1f1;
@@ -397,7 +397,7 @@
   height: auto;
 }
 .lazy-img-thumb {
-  filter: blur(6px);
+  filter: blur(1px);
   transform: scale(1.05);
 }
 .lazy-img-full {
@@ -458,13 +458,15 @@
   justify-content: center;
   flex-wrap: wrap;
   margin-top: 15px;
+  gap: 15px;
   }
-  .cimg{
-  width:150px;
-  
-  }
+  #contactbar .lazy-img-container {
+  width: 150px; /* 放大后的宽度，可调 */
+  height: auto;
+  flex-shrink: 0; /* 防止被挤压变形 */
+}
   #contactbar{
-  width: 90%;
+  width: 90%;  
   min-width: 200px;
   max-width: 300px;
   display: flex;
@@ -472,8 +474,7 @@
   align-items: center;
   color: #00DDFF;
   padding-right: 25px;
-  font-size: 1.3em;
-  margin-top: 25px;
+  font-size: 1.4em;
   padding-left: 10px;
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(22px) saturate(200%);
@@ -492,23 +493,6 @@
   #contactbar:active{
   transform: scale(1.01);
   }
-/* 适配浏览器 - 支持backdrop-filter的浏览器：显示毛玻璃 */
-@supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
-  #topbar { background: linear-gradient(90deg,#A98BFF,transparent); }
-}
-/* 不支持的浏览器：显示半透纯色兜底 */
-@supports not (backdrop-filter: blur(1px)) and not (-webkit-backdrop-filter: blur(1px)) {
-  #topbar { background: rgba(169,139,255,0.7); }
-}
-/* 支持grid的浏览器：用grid布局 */
-@supports (display: grid) {
-  #case-box { display: grid; }
-}
-/* 不支持的浏览器：用flex布局兜底 */
-@supports not (display: grid) {
-  #case-box { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; }
-  .case-card { flex: 0 0 200px; margin-bottom: 1rem; }
-}
 
 
   /* 响应式适配 */
@@ -605,9 +589,11 @@
     <div id="contactmebox">
      <h1 style="width: var(--body-width);text-align: center;">联系我：</h1>
      <div id="contactbar">
-      <p>微信公众号:</p><img src="./pictures/vxgzh.jpeg" class="cimg">
+      <p>微信公众号:</p><lazy-img src ="./pictures/vxgzh.jpeg" thumb="./pictures/vxgzhnf.jpg" class="cimg"></lazy-img>
      </div>
-    
+      <div id="contactbar">
+      <p>QQ聊天群:</p><lazy-img src ="./pictures/qqchatq.jpg" thumb="./pictures/qqchatqnf.jpg" class="cimg"></lazy-img>
+     </div>
     </div>
     <script>
     // 替换原burger点击代码
