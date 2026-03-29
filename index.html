@@ -37,13 +37,12 @@
     --topbar-height:42px;
     --case-width:200px;
     }
-    h1{
+    h2{
     font-size: 2.3rem;
     color: #00FFF4;
     }
     body{
-    background: linear-gradient(135deg,#4D2EFF,#0800FF75);
-    
+    background: linear-gradient(135deg,#4D2EFF,#0800FF75);    
     background-attachment: fixed;
     width: var(--body-width);
     height: var(--body-height);
@@ -64,10 +63,61 @@
     width: auto;
     height: auto;
     backdrop-filter: blur(1px);
-    -webkit-backdrop-filter: blur(1px);
-    
+    -webkit-backdrop-filter: blur(1px);    
     border-radius:15px;
     }
+    /* IE浏览器专属引导层 覆盖全屏 */
+#ie-guide-layer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(135deg, #0078D4, #00A4EF);
+  z-index: 99999; /* 最高层级，覆盖所有内容 */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  font-family: "Microsoft YaHei", sans-serif;
+  padding: 20px;
+  box-sizing: border-box;
+  margin: 0;
+}
+#ie-guide-layer .title {
+  font-size: 2.2rem;
+  margin-bottom: 20px;
+  text-align: center;
+  font-weight: bold;
+}
+#ie-guide-layer .desc {
+  font-size: 1.2rem;
+  margin-bottom: 40px;
+  text-align: center;
+  max-width: 600px;
+  line-height: 1.8;
+}
+#ie-guide-layer .download-btn {
+  display: inline-block;
+  padding: 15px 40px;
+  background: #fff;
+  color: #0078D4;
+  font-size: 1.3rem;
+  font-weight: bold;
+  border-radius: 50px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+#ie-guide-layer .download-btn:hover {
+  background: #f5f5f5;
+  transform: translateY(-3px);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.3);
+}
+
+
+
     #topbar{
     position:fixed;
     width: var(--body-width);
@@ -519,6 +569,13 @@
     <noscript>
     * 当前无script，请打开script。
     </noscript>
+    <!-- IE浏览器引导下载Edge的容器，默认隐藏 -->
+    <div id="ie-guide-layer" style="display: none;">
+     <div class="title">你的浏览器版本过低</div>
+     <div class="desc">当前使用的IE浏览器不支持本站所有功能，为获得更好的访问体验，请下载微软Edge浏览器</div>
+     <a href="https://www.microsoft.com/zh-cn/microsoft-edge/download" target="_blank" class="download-btn">立即下载Edge</a>
+    </div>
+
     <div id="topbar">
      <label class="burger" for="burger">
      <input type="checkbox" id="burger">
@@ -571,15 +628,15 @@
     <div id="ability-show">
    
      <div id="ability-box">
-     <h1 style="font-size: 2.6rem;color: #FFFB00;">个人能力:</h1><br>
-     <h1>前端核心:</h1><br> 
+     <h2 style="font-size: 2.6rem;color: #FFFB00;">个人能力:</h2><br>
+     <h2>前端核心:</h2><br> 
      <p>HTML5 / CSS3 / JavaScript ES6+
      响应式布局 / Flex / Grid
      浏览器工作原理 / 网页优化</p><br> 
-     <h1>工程与工具:</h1><br> 
+     <h2>工程与工具:</h2><br> 
      <p>Node.js（入门）
      Git / VS Code</p><br> 
-     <h1>系统与底层:</h1><br> 
+     <h2>系统与底层:</h2><br> 
      <p>Android 设备解锁
      Bootloader 操作
      系统底层理解</p>
@@ -587,7 +644,7 @@
     </div>
     
     <div id="contactmebox">
-     <h1 style="width: var(--body-width);text-align: center;">联系我：</h1>
+     <h2 style="width: var(--body-width);text-align: center;">联系我：</h2>
      <div id="contactbar">
       <p>微信公众号:</p><lazy-img src ="./pictures/vxgzh.jpeg" thumb="./pictures/vxgzhnf.jpg" class="cimg"></lazy-img>
      </div>
@@ -596,6 +653,17 @@
      </div>
     </div>
     <script>
+    isIEBrowser()
+    // 检测是否为IE浏览器（全版本：IE6-IE11）
+function isIEBrowser() {
+  const userAgent = window.navigator.userAgent;
+  // 匹配IE6-10的UA特征 + IE11的rv:版本特征
+  return /MSIE|Trident\/7\.0|rv:11\.0/.test(userAgent);
+}
+// 检测到IE则显示引导层
+if (isIEBrowser()) {
+  document.getElementById('ie-guide-layer').style.display = 'flex';
+}
     // 替换原burger点击代码
 const burger = document.getElementById('burger'); // 新增：获取DOM元素
 const navigationBox = document.getElementById('navigation-box');
